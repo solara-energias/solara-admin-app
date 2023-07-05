@@ -1,0 +1,76 @@
+{
+  "package": {
+    "productName": "solara-admin-app",
+    "version": "0.1.0"
+  },
+  "build": {
+    "beforeBuildCommand": "yarn build",
+    "beforeDevCommand": "yarn dev",
+    "devPath": "http://localhost:3000",
+    "distDir": "../out"
+  },
+  "tauri": {
+    "bundle": {
+      "active": true,
+      "targets": "all",
+      "identifier": "com.tauri.dev",
+      "publisher": "bluey",
+      "copyright": "",
+      "icon": [
+        "icons/32x32.png",
+        "icons/128x128.png",
+        "icons/128x128@2x.png",
+        "icons/icon.icns",
+        "icons/icon.ico"
+      ],
+      "resources": [],
+      "externalBin": [],
+      "category": "DeveloperTool",
+      "shortDescription": "",
+      "longDescription": "",
+      "deb": {
+        "depends": []
+      },
+      "macOS": {
+        "frameworks": [],
+        "exceptionDomain": "",
+        "signingIdentity": null,
+        "entitlements": null,
+        "providerShortName": null
+      },
+      "windows": {
+        "certificateThumbprint": null,
+        "digestAlgorithm": "sha256",
+        "timestampUrl": ""
+      }
+    },
+    "updater": {
+      "active": false
+    },
+    "allowlist": {
+      "all": false,
+      "http": {
+        "all": true,
+        "request": false,
+        "scope": ["http://solaraenergias.net.br/*"]
+      },
+      "clipboard": {
+        "all": false,
+        "readText": false,
+        "writeText": true
+      }
+    },
+    "windows": [
+      {
+        "title": "Solara Admin App",
+        "minWidth": 800,
+        "minHeight": 600,
+        "resizable": false,
+        "fullscreen": false
+      }
+    ],
+    "security": {
+      "csp": "default-src blob: data: filesystem: ws: wss: http: https: tauri: 'unsafe-eval' 'unsafe-inline' 'self' img-src: 'self'"
+    }
+  }
+}
