@@ -1,6 +1,6 @@
 {
   "package": {
-    "productName": "solara-admin-app",
+    "productName": "Solara Admin",
     "version": "0.1.0"
   },
   "build": {
