@@ -1,7 +1,16 @@
+import { TauriContextType } from '@app/context/tauri';
 import { Customer, RawCustomerData } from '@solara/api';
-import { ResponseType, fetch } from '@tauri-apps/api/http';
 
-export async function fetchCustomers(query: string) {
+export async function fetchCustomers(
+  query: string,
+  http: TauriContextType['http'],
+) {
+  if (!http) {
+    return;
+  }
+
+  const { fetch, ResponseType } = http;
+
   try {
     const res = await fetch(
       `http://solaraenergias.net.br/admin/solar_view_api.php`,

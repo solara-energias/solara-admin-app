@@ -13,7 +13,7 @@
     "bundle": {
       "active": true,
       "targets": "all",
-      "identifier": "com.tauri.dev",
+      "identifier": "solara-admin-app",
       "publisher": "bluey",
       "copyright": "",
       "icon": [

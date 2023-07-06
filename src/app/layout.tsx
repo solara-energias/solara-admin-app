@@ -1,3 +1,4 @@
+import { TauriProvider } from '@app/context/tauri';
 import { cn } from '@app/lib/utils';
 import { Inter } from 'next/font/google';
 import './globals.css';
@@ -17,7 +18,7 @@ export default function RootLayout({
   return (
     <html lang="pt-BR">
       <body className={cn(inter.className, 'bg-neutral-100 text-neutral-950')}>
-        {children}
+        <TauriProvider>{children}</TauriProvider>
       </body>
     </html>
   );

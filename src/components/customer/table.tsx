@@ -1,6 +1,7 @@
 'use client';
 
 import { useSearch } from '@app/context/search';
+import { useTauri } from '@app/context/tauri';
 import { fetchCustomers } from '@app/lib/customers';
 import { Customer } from '@solara/api';
 import { Loader2 } from 'lucide-react';
@@ -16,6 +17,7 @@ import {
 import CustomerRow from './row';
 
 function CustomerTable() {
+  const { http } = useTauri();
   const { search, isLoading, setIsLoading } = useSearch();
   const [customers, setCustomers] = useState<Customer[] | undefined>([]);
 
@@ -28,7 +30,7 @@ function CustomerTable() {
 
     setIsLoading(true);
 
-    fetchCustomers(search)
+    fetchCustomers(search, http)
       .then(setCustomers)
       .then(() => setIsLoading(false));
   }, [search]);
