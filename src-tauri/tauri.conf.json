@@ -50,8 +50,8 @@
     "allowlist": {
       "all": false,
       "http": {
-        "all": true,
-        "request": false,
+        "all": false,
+        "request": true,
         "scope": ["http://solaraenergias.net.br/*"]
       },
       "clipboard": {
