@@ -41,11 +41,19 @@
       "windows": {
         "certificateThumbprint": null,
         "digestAlgorithm": "sha256",
-        "timestampUrl": ""
+        "timestampUrl": "",
+        "wix": {
+          "language": "pt-BR"
+        }
       }
     },
     "updater": {
-      "active": false
+      "active": true,
+      "dialog": false,
+      "endpoints": [
+        "https://releases.bluey.tech/tauri/{{target}}/{{arch}}/{{current_version}}"
+      ],
+      "pubkey": "dW50cnVzdGVkIGNvbW1lbnQ6IG1pbmlzaWduIHB1YmxpYyBrZXk6IEY0NjFFNjQxNUY5RkI3NTAKUldSUXQ1OWZRZVpoOUE4OVBXWFBPTG5GdUt1TDdXRGdBRWNKMlJTTmEvNUcxb1FNdTUrcHpDRFEK"
     },
     "allowlist": {
       "all": false,
