@@ -4,6 +4,7 @@
     "version": "0.1.2"
   },
   "build": {
+    "withGlobalTauri": true,
     "beforeBuildCommand": "yarn build",
     "beforeDevCommand": "yarn dev",
     "devPath": "http://localhost:3000",
