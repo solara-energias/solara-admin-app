@@ -7,6 +7,8 @@ import {
   HoverCardContent,
   HoverCardTrigger,
 } from '../ui/hover-card';
+import { Label } from '../ui/label';
+import { Separator } from '../ui/separator';
 import { TableCell, TableRow } from '../ui/table';
 
 interface CustomerRowProps {
@@ -14,7 +16,7 @@ interface CustomerRowProps {
 }
 
 function CustomerRow({ customer }: CustomerRowProps) {
-  const { name, phone } = customer;
+  const { name, phone, address, consultant, shopping } = customer;
   const kwp = customer.kwp?.toLocaleString('pt-BR') || '-';
   const brand = customer.brand || '-';
 
@@ -27,7 +29,41 @@ function CustomerRow({ customer }: CustomerRowProps) {
               {name}
             </p>
           </HoverCardTrigger>
-          <HoverCardContent>Howdy</HoverCardContent>
+          <HoverCardContent align="start" className="w-fit space-y-2">
+            <div>
+              <Label>Endereço</Label>
+              <p className="text-neutral-700">{address}</p>
+            </div>
+            <div>
+              <Label>Consultor</Label>
+              <p className="text-neutral-700">{consultant}</p>
+            </div>
+            <div>
+              <Label>Compras</Label>
+              {shopping.map((shop) => (
+                <div
+                  className="text-neutral-700 flex items-center"
+                  key={shop.boughtTimestamp}
+                >
+                  <p className="font-medium">
+                    R${' '}
+                    {shop.cost.toLocaleString('pt-BR', {
+                      currency: 'BRL',
+                      maximumFractionDigits: 2,
+                      minimumFractionDigits: 2,
+                    })}
+                  </p>
+                  <Separator
+                    orientation="vertical"
+                    className="bg-neutral-400 h-4 mx-1"
+                  />
+                  <p>
+                    {shop.description} ×{shop.quantity}
+                  </p>
+                </div>
+              ))}
+            </div>
+          </HoverCardContent>
         </HoverCard>
       </TableCell>
       <TableCell className="group">

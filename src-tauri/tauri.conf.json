@@ -65,8 +65,9 @@
         "title": "Solara Admin App",
         "minWidth": 800,
         "minHeight": 600,
-        "resizable": false,
-        "fullscreen": false
+        "resizable": true,
+        "fullscreen": false,
+        "maximizable": true
       }
     ],
     "security": {

@@ -1,7 +1,6 @@
 'use client';
 
 import { useSearch } from '@app/context/search';
-import { Loader2 } from 'lucide-react';
 import { useForm } from 'react-hook-form';
 import { Button } from './ui/button';
 import { Input } from './ui/input';
@@ -31,8 +30,10 @@ function Form() {
         required
         {...register('customer', { required: true })}
       />
-      <Button disabled={isLoading} type="submit">
-        {isLoading && <Loader2 className="animate-spin w-4 h-4 mr-1" />}
+      <Button
+        className={isLoading ? 'animate-pulse pointer-events-none' : ''}
+        type="submit"
+      >
         Pesquisar
       </Button>
     </form>
