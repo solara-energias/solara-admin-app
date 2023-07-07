@@ -1,7 +1,7 @@
 {
   "package": {
     "productName": "Solara Admin",
-    "version": "0.1.4"
+    "version": "0.1.5"
   },
   "build": {
     "beforeBuildCommand": "yarn build",
@@ -50,6 +50,9 @@
     "updater": {
       "active": true,
       "dialog": false,
+      "windows": {
+        "installMode": "basicUi"
+      },
       "endpoints": [
         "https://releases.bluey.tech/tauri/solara-admin-app"
       ],
