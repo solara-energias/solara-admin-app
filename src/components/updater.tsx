@@ -12,7 +12,7 @@ import {
 } from './ui/alert-dialog';
 
 function Updater() {
-  const [hasUpdate, setHasUpdate] = useState<boolean>(true);
+  const [hasUpdate, setHasUpdate] = useState<boolean>(false);
 
   useEffect(() => {
     import('@tauri-apps/api/updater').then((updater) => {
