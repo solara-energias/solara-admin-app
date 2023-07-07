@@ -50,9 +50,6 @@
     "updater": {
       "active": true,
       "dialog": false,
-      "windows": {
-        "installMode": "basicUi"
-      },
       "endpoints": [
         "https://releases.bluey.tech/tauri/solara-admin-app"
       ],
