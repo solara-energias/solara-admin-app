@@ -1,5 +1,6 @@
 'use client';
 
+import { useInterval } from '@mantine/hooks';
 import { useEffect, useState } from 'react';
 import {
   AlertDialog,
@@ -13,11 +14,14 @@ import {
 
 function Updater() {
   const [hasUpdate, setHasUpdate] = useState<boolean>(false);
-
-  useEffect(() => {
+  const updaterInterval = useInterval(() => {
     import('@tauri-apps/api/updater').then((updater) => {
       updater.checkUpdate().then((update) => setHasUpdate(update.shouldUpdate));
     });
+  }, 30000);
+
+  useEffect(() => {
+    updaterInterval.start();
   }, []);
 
   const installUpdate = () => {
