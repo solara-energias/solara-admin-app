@@ -1,8 +1,8 @@
 name: Public Releases
 on:
-  release:
-    types:
-      - "released"
+  workflow_run:
+    workflows: build
+    types: completed
   workflow_dispatch:
 
 jobs:
