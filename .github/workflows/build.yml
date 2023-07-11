@@ -61,3 +61,8 @@ jobs:
           releaseBody: See the assets to download this version and install.
           releaseDraft: false
           prerelease: false
+      - name: Release
+        uses: softprops/action-gh-release@v1
+        with:
+          repository: Solara-Energias/solara-admin-app-releases
+          token: ${{ secrets.GITHUB_TOKEN }}
