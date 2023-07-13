@@ -8,8 +8,14 @@ import {
   HoverCardTrigger,
 } from '../ui/hover-card';
 import { Label } from '../ui/label';
-import { Separator } from '../ui/separator';
-import { TableCell, TableRow } from '../ui/table';
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from '../ui/table';
 
 interface CustomerRowProps {
   customer: Customer;
@@ -29,39 +35,51 @@ function CustomerRow({ customer }: CustomerRowProps) {
               {name}
             </p>
           </HoverCardTrigger>
-          <HoverCardContent align="start" className="w-fit space-y-2">
-            <div>
+          <HoverCardContent align="start" className="w-fit max-w-lg space-y-2">
+            <div className="group">
               <Label>Endereço</Label>
-              <p className="text-neutral-700">{address}</p>
+              <Copy text={address}>
+                <p className="text-neutral-700">{address}</p>
+              </Copy>
             </div>
-            <div>
+            <div className="group">
               <Label>Consultor</Label>
-              <p className="text-neutral-700">{consultant}</p>
+              <Copy text={consultant}>
+                <p className="text-neutral-700">{consultant}</p>
+              </Copy>
             </div>
             <div>
               <Label>Compras</Label>
-              {shopping.map((shop) => (
-                <div
-                  className="text-neutral-700 flex items-center"
-                  key={shop.boughtTimestamp}
-                >
-                  <p className="font-medium">
-                    R${' '}
-                    {shop.cost.toLocaleString('pt-BR', {
-                      currency: 'BRL',
-                      maximumFractionDigits: 2,
-                      minimumFractionDigits: 2,
-                    })}
-                  </p>
-                  <Separator
-                    orientation="vertical"
-                    className="bg-neutral-400 h-4 mx-1"
-                  />
-                  <p>
-                    {shop.description} ×{shop.quantity}
-                  </p>
-                </div>
-              ))}
+              <Table className="max-w-full">
+                <TableHeader>
+                  <TableRow>
+                    <TableHead>Produto</TableHead>
+                    <TableHead>Valor</TableHead>
+                  </TableRow>
+                </TableHeader>
+                <TableBody>
+                  {shopping.map((shop) => (
+                    <TableRow
+                      className="text-neutral-700"
+                      key={shop.boughtTimestamp}
+                    >
+                      <TableCell className="w-full">
+                        <p>
+                          {shop.description} ×{shop.quantity}
+                        </p>
+                      </TableCell>
+                      <TableCell className="shrink-0 whitespace-nowrap w-fit font-medium">
+                        {'R$ ' +
+                          shop.cost.toLocaleString('pt-BR', {
+                            currency: 'BRL',
+                            maximumFractionDigits: 2,
+                            minimumFractionDigits: 2,
+                          })}
+                      </TableCell>
+                    </TableRow>
+                  ))}
+                </TableBody>
+              </Table>
             </div>
           </HoverCardContent>
         </HoverCard>
