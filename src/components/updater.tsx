@@ -1,7 +1,7 @@
 'use client';
 
 import { useInterval } from '@mantine/hooks';
-import { useEffect, useState } from 'react';
+import { PropsWithChildren, useEffect, useState } from 'react';
 import {
   AlertDialog,
   AlertDialogAction,
@@ -12,40 +12,49 @@ import {
   AlertDialogTitle,
 } from './ui/alert-dialog';
 
-function Updater() {
+function Updater({ children }: PropsWithChildren) {
   const [hasUpdate, setHasUpdate] = useState<boolean>(false);
-  const updaterInterval = useInterval(() => {
-    import('@tauri-apps/api/updater').then((updater) => {
-      updater.checkUpdate().then((update) => setHasUpdate(update.shouldUpdate));
-    });
-  }, 30000);
+
+  const checkForUpdates = async () => {
+    const updater = await import('@tauri-apps/api/updater');
+    const { shouldUpdate } = await updater.checkUpdate();
+    setHasUpdate(shouldUpdate);
+  };
+
+  const updaterInterval = useInterval(checkForUpdates, 30000);
 
   useEffect(() => {
+    checkForUpdates();
     updaterInterval.start();
+
+    return updaterInterval.stop;
   }, []);
 
-  const installUpdate = () => {
-    import('@tauri-apps/api/updater').then((updater) => {
-      updater.installUpdate().then(() => setHasUpdate(false));
-    });
+  const installUpdate = async () => {
+    const updater = await import('@tauri-apps/api/updater');
+    await updater.installUpdate();
+    setHasUpdate(false);
   };
 
   return (
-    <AlertDialog open={hasUpdate}>
-      <AlertDialogContent>
-        <AlertDialogHeader>
-          <AlertDialogTitle>Nova atualização!</AlertDialogTitle>
-          <AlertDialogDescription>
-            Uma atualização obrigatória foi encontrada.
-          </AlertDialogDescription>
-        </AlertDialogHeader>
-        <AlertDialogFooter>
-          <AlertDialogAction onClick={installUpdate}>
-            Atualizar
-          </AlertDialogAction>
-        </AlertDialogFooter>
-      </AlertDialogContent>
-    </AlertDialog>
+    <>
+      <AlertDialog open={hasUpdate}>
+        <AlertDialogContent>
+          <AlertDialogHeader>
+            <AlertDialogTitle>Nova atualização!</AlertDialogTitle>
+            <AlertDialogDescription>
+              Uma atualização obrigatória foi encontrada.
+            </AlertDialogDescription>
+          </AlertDialogHeader>
+          <AlertDialogFooter>
+            <AlertDialogAction onClick={installUpdate}>
+              Atualizar
+            </AlertDialogAction>
+          </AlertDialogFooter>
+        </AlertDialogContent>
+      </AlertDialog>
+      {children}
+    </>
   );
 }
 
